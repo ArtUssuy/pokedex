@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import { Container, Image, Label } from './styles';
 
-const Card = () => {
+const Card = ({pokemonName, pokemonIndex}) => {
 
-  const [image, setImage] = useState("https://static.quizur.com/i/b/57c1c26fc0b812.5998420157c1c26fb156c9.51498011.png")
-  const [name, setName] = useState("???")
-
+  const imageUnknown = "https://static.quizur.com/i/b/57c1c26fc0b812.5998420157c1c26fb156c9.51498011.png"
+  const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonIndex}.png`;
 
 
   return (
     <Container>
-      <Image src={image} />
+      <Image src={imageUrl === undefined ? imageUnknown : imageUrl} />
       <footer>
-        <Label>{name}</Label>
+        <Label>{pokemonName !== undefined ? pokemonName : "???" }</Label>
       </footer>
     </Container>
   );

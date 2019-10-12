@@ -4,14 +4,14 @@ import Header from './components/header/header'
 import Board from './components/board/board';
 
 
-function App() {
+const App = () => {
   return (
     <>
       <GlobalStyle />
       <Header />
       <Board />
     </>
-  );
+  )
 }
 
 export default App;
