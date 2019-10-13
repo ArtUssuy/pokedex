@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Container, Image, Label } from './styles';
 
 const Card = ({pokemonName, pokemonIndex}) => {
