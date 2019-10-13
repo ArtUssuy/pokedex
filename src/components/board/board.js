@@ -30,7 +30,7 @@ const Board = () => {
         <InfiniteScroll
           dataLength={data.length}
           next={fetchMoreData}
-          hasMore={times < 200 ? true : false}
+          hasMore={times < 1090 ? true : false}
 		  endMessage={"End!"}
           loader={<h4>Loading...</h4>}
         >
