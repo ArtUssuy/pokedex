@@ -15,12 +15,8 @@ const Paginate = () => {
 
 	const fetchData = async (set = 0, limit = 100) => {
 		const url = `https://pokeapi.co/api/v2/pokemon?offset=${set}&limit=${limit}`;
-		console.log("TCL: fetchData -> limit", limit);
 		const response = await axios(url);
-
 		setData(response.data.results);
-
-		console.log("TCL: Paginate -> data", data);
 	};
 
 	const handlePageClick = e => {
