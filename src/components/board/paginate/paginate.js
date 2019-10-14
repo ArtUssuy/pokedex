@@ -26,7 +26,6 @@ const Paginate = () => {
 	const handlePageClick = e => {
 		setData([]);
 		let setValue = `${e.selected.toString().concat("00")}`;
-		// let limitValue = `${(e.selected + 1).toString().concat("00")}`;
 		fetchData(setValue);
 	};
 
@@ -34,24 +33,32 @@ const Paginate = () => {
 		<>
 			<Container>
 				{data !== undefined
-					? data.map(pokemon => (
-							<LazyLoad>
-								<Card
-									key={pokemon.name}
-									pokemonName={pokemon.name}
-									pokemonIndex={
-										pokemon.url.split("/")[
-											pokemon.url.split("/").length - 2
-										]
-									}
-								/>
-							</LazyLoad>
-					  ))
+					? data.map(pokemon =>
+							pokemon.url.split("/")[
+								pokemon.url.split("/").length - 2
+							] < 10091 ? (
+								<LazyLoad key={pokemon.name}>
+									<Card
+										key={pokemon.name}
+										pokemonName={pokemon.name}
+										pokemonIndex={
+											pokemon.url.split("/")[
+												pokemon.url.split("/").length -
+													2
+											]
+										}
+									/>
+								</LazyLoad>
+							) : (
+								""
+							)
+					  )
 					: ""}
 			</Container>
 
 			<ReactPaginate
 				previousLabel={"previous"}
+				pageCount={9}
 				nextLabel={"next"}
 				breakLabel={"..."}
 				onPageChange={handlePageClick}

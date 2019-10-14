@@ -8,8 +8,13 @@ export const Container = styled.div`
 	background-color: #fff;
 	height: 300px;
 	width: 300px;
+	padding-bottom: 50px;
 	margin-right: 10px;
 	margin-top: 50px;
+	transition: transform 1s;
+	&:hover {
+		transform: translateY(-10px);
+	}
 `;
 
 export const Image = styled.img`
