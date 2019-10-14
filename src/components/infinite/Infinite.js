@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import LazyLoad from "react-lazyload";
-import { Container } from "./../styles";
-import Card from "./../../cards/cards";
+
+import { Container } from "./styles";
+import Card from "./../cards/cards";
 
 const Infinite = () => {
 	const [data, setData] = useState([]);
@@ -22,7 +23,6 @@ const Infinite = () => {
 	const fetchMoreData = () => {
 		let value = infiniteScroll;
 		setInfiniteScroll(value + 100);
-		// eslint-disable-next-line no-const-assign
 		fetchData(0, (value += 100));
 	};
 

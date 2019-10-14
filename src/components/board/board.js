@@ -2,10 +2,8 @@ import React, { useState } from "react";
 
 import { Label, FilterWrapper, Button } from "./styles";
 
-import Paginate from "./paginate/paginate";
-import Infinite from "./infinite/Infinite";
-
-import "./paginate/stylePaginate.css";
+import Paginate from "./../paginate/paginate";
+import Infinite from "./../infinite/Infinite";
 
 const Board = () => {
 	const [layout, setLayout] = useState(true);
