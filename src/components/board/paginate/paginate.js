@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
-
+import LazyLoad from "react-lazyload";
 import "./stylePaginate.css";
 import { Container } from "./../styles";
 import Card from "./../../cards/cards";
@@ -35,15 +35,17 @@ const Paginate = () => {
 			<Container>
 				{data !== undefined
 					? data.map(pokemon => (
-							<Card
-								key={pokemon.name}
-								pokemonName={pokemon.name}
-								pokemonIndex={
-									pokemon.url.split("/")[
-										pokemon.url.split("/").length - 2
-									]
-								}
-							/>
+							<LazyLoad>
+								<Card
+									key={pokemon.name}
+									pokemonName={pokemon.name}
+									pokemonIndex={
+										pokemon.url.split("/")[
+											pokemon.url.split("/").length - 2
+										]
+									}
+								/>
+							</LazyLoad>
 					  ))
 					: ""}
 			</Container>
