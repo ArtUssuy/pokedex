@@ -1,23 +1,51 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
-  background-color: #FFF;
-  height: 150px;
-  width: 150px;
-  margin-right: 10px;
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	background-color: #fff;
+	height: 300px;
+	width: 300px;
+	margin-right: 10px;
+	margin-top: 50px;
 `;
 
 export const Image = styled.img`
-width: 100%;
-`
+	transform: scale(2.4);
+`;
+
+export const Footer = styled.footer`
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	height: 80px;
+	padding-left: 30px;
+	padding-top: 10px;
+`;
+
+export const ImageWrapper = styled.div`
+	background-color: #f2f2f2;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	border-radius: 10px;
+`;
 
 export const Label = styled.span`
-  display: block;
-  height: 30px;
-  text-align: center;
-  font-size: 20px;
-`
+	display: block;
+	text-align: center;
+	font-size: 25px;
+	font-family: "Flexo-Bold", arial, sans-serif;
+	color: #919191;
+	&:last-child {
+		font-size: 35px;
+		text-transform: capitalize;
+		font-family: "Flexo-Demi", arial, sans-serif;
+		color: #313131;
+		margin-top: 15px;
+	}
+`;

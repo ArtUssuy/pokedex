@@ -1,15 +1,15 @@
 import React from "react";
 import Paginate from "./paginate/paginate";
-import Infinite from "./infinite/Infinite";
+// import Infinite from "./infinite/Infinite";
 
 import "./paginate/stylePaginate.css";
 
 const Board = () => {
 	return (
 		<>
-			{/* <Paginate /> */}
+			<Paginate />
 
-			<Infinite />
+			{/* <Infinite /> */}
 		</>
 	);
 };

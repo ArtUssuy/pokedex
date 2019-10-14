@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Image, Label } from "./styles";
+import { Container, Image, Label, ImageWrapper, Footer } from "./styles";
 
 const Card = ({ pokemonName, pokemonIndex }) => {
 	const imageUnknown =
@@ -8,11 +8,21 @@ const Card = ({ pokemonName, pokemonIndex }) => {
 
 	return (
 		<Container>
-			<span>{pokemonIndex}</span>
-			<Image src={imageUrl === undefined ? imageUnknown : imageUrl} />
-			<footer>
+			<ImageWrapper>
+				<Image src={imageUrl === undefined ? imageUnknown : imageUrl} />
+			</ImageWrapper>
+			<Footer>
+				<Label>
+					Nº
+					{pokemonIndex.length === 1
+						? " 00"
+						: pokemonIndex.length === 2
+						? " 0"
+						: " "}
+					{pokemonIndex}
+				</Label>
 				<Label>{pokemonName !== undefined ? pokemonName : "???"}</Label>
-			</footer>
+			</Footer>
 		</Container>
 	);
 };
