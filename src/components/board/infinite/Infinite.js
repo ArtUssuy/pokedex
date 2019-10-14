@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
-
+import LazyLoad from "react-lazyload";
 import { Container } from "./../styles";
 import Card from "./../../cards/cards";
 
@@ -40,15 +40,17 @@ const Infinite = () => {
 			<Container>
 				{data !== undefined
 					? data.map(pokemon => (
-							<Card
-								key={pokemon.name}
-								pokemonName={pokemon.name}
-								pokemonIndex={
-									pokemon.url.split("/")[
-										pokemon.url.split("/").length - 2
-									]
-								}
-							/>
+							<LazyLoad>
+								<Card
+									key={pokemon.name}
+									pokemonName={pokemon.name}
+									pokemonIndex={
+										pokemon.url.split("/")[
+											pokemon.url.split("/").length - 2
+										]
+									}
+								/>
+							</LazyLoad>
 					  ))
 					: ""}
 			</Container>

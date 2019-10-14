@@ -7,6 +7,7 @@
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-infinite-scroll-component": "^4.5.3",
+    "react-lazyload": "^2.6.2",
     "react-paginate": "^6.3.0",
     "react-scripts": "3.2.0",
     "styled-components": "^4.4.0"
