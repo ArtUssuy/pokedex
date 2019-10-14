@@ -40,7 +40,7 @@ const Infinite = () => {
 			<Container>
 				{data !== undefined
 					? data.map(pokemon => (
-							<LazyLoad>
+							<LazyLoad key={pokemon.name}>
 								<Card
 									key={pokemon.name}
 									pokemonName={pokemon.name}

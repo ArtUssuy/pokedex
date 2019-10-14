@@ -10,3 +10,14 @@ export const Container = styled.div`
 	padding-top: 10px;
 	background-color: #fff;
 `;
+
+export const FilterWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 40px;
+`;
+
+export const Label = styled.label`
+	margin-right: 20px;
+`;
