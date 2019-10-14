@@ -10,13 +10,10 @@ const Infinite = () => {
 	const [infiniteScroll, setInfiniteScroll] = useState(100);
 
 	useEffect(() => {
-		console.log("TCL: Infinite -> useEffect");
 		fetchData();
 	}, []);
 
 	const fetchData = async (set = 0, infiniteScroll = 100) => {
-		console.log("TCL: fetchData -> set - ", set);
-		console.log("TCL: fetchData -> infiniteScroll - ", infiniteScroll);
 		const url = `https://pokeapi.co/api/v2/pokemon?offset=${set}&limit=${infiniteScroll}`;
 		const response = await axios(url);
 		setData(response.data.results);

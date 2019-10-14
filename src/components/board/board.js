@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Label, FilterWrapper } from "./styles";
+import { Label, FilterWrapper, Button } from "./styles";
 
 import Paginate from "./paginate/paginate";
 import Infinite from "./infinite/Infinite";
@@ -8,15 +8,15 @@ import Infinite from "./infinite/Infinite";
 import "./paginate/stylePaginate.css";
 
 const Board = () => {
+	const [layout, setLayout] = useState(true);
+
 	return (
 		<>
 			<FilterWrapper>
-				<Label>
-					Infinite Scroll <input type="checkbox" />
-				</Label>
-				<Label>
-					Paginate <input type="checkbox" />
-				</Label>
+				<select onChange={e => setLayout(!layout)}>
+					<option>Infinite Scroll</option>
+					<option>Paginate</option>
+				</select>
 				<Label>
 					Numero Inicial <input type="text" />
 				</Label>
@@ -31,10 +31,10 @@ const Board = () => {
 						<option>30</option>
 					</select>
 				</Label>
-				<button>Apply!</button>
+				<Button>Apply!</Button>
 			</FilterWrapper>
-			<Paginate />
-			<Infinite />
+
+			{layout === true ? <Infinite /> : <Paginate />}
 		</>
 	);
 };

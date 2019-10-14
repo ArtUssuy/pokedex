@@ -19,5 +19,9 @@ export const FilterWrapper = styled.div`
 `;
 
 export const Label = styled.label`
-	margin-right: 20px;
+	margin-left: 20px;
+`;
+
+export const Button = styled.button`
+	margin-left: 20px;
 `;
