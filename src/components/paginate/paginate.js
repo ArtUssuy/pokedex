@@ -8,7 +8,7 @@ import "./styles.css";
 import { Container } from "./styles";
 import Card from "./../cards/cards";
 
-const Paginate = () => {
+const Paginate = cardsPerPage => {
 	const [data, setData] = useState([]);
 
 	useEffect(() => {

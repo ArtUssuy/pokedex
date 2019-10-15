@@ -6,15 +6,16 @@ import LazyLoad from "react-lazyload";
 import { Container } from "./styles";
 import Card from "./../cards/cards";
 
-const Infinite = () => {
+const Infinite = ({ cardsPerPage }) => {
 	const [data, setData] = useState([]);
 	const [infiniteScroll, setInfiniteScroll] = useState(100);
 
 	useEffect(() => {
 		fetchData();
-	}, []);
+	}, [cardsPerPage]);
 
-	const fetchData = async (set = 0, infiniteScroll = 100) => {
+	const fetchData = async (set = 0, infiniteScroll) => {
+		console.log("TCL: fetchData -> infiniteScroll", infiniteScroll);
 		const url = `https://pokeapi.co/api/v2/pokemon?offset=${set}&limit=${infiniteScroll}`;
 		const response = await axios(url);
 		setData(response.data.results);
@@ -22,8 +23,8 @@ const Infinite = () => {
 
 	const fetchMoreData = () => {
 		let value = infiniteScroll;
-		setInfiniteScroll(value + 100);
-		fetchData(0, (value += 100));
+		setInfiniteScroll((value += 100));
+		fetchData(0, infiniteScroll);
 	};
 
 	return (

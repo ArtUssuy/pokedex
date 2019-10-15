@@ -7,7 +7,7 @@ import Infinite from "./../infinite/Infinite";
 
 const Board = () => {
 	const [layout, setLayout] = useState(true);
-
+	const [cardsPerPage, setCardsPerPage] = useState("10");
 	return (
 		<>
 			<FilterWrapper>
@@ -32,7 +32,11 @@ const Board = () => {
 				<Button>Apply!</Button>
 			</FilterWrapper>
 
-			{layout === true ? <Infinite /> : <Paginate />}
+			{layout === true ? (
+				<Infinite cardsPerPage={cardsPerPage} />
+			) : (
+				<Paginate cardsPerPage={cardsPerPage} />
+			)}
 		</>
 	);
 };
