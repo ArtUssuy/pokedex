@@ -8,23 +8,27 @@ import "./styles.css";
 import { Container } from "./styles";
 import Card from "./../cards/cards";
 
-const Paginate = cardsPerPage => {
+const Paginate = ({ cardsPerPage, totalPokemons }) => {
 	const [data, setData] = useState([]);
-
+	const [numberPages, setNumbersPage] = useState(
+		totalPokemons / cardsPerPage
+	);
 	useEffect(() => {
+		console.log("TCL: Paginate -> useEffect");
 		fetchData();
-	}, []);
+	}, [cardsPerPage]);
 
-	const fetchData = async (set = 0, limit = 100) => {
-		const url = `https://pokeapi.co/api/v2/pokemon?offset=${set}&limit=${limit}`;
+	const fetchData = async (offset = 0, limit = cardsPerPage) => {
+		const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
 		const response = await axios(url);
 		setData(response.data.results);
 	};
 
 	const handlePageClick = e => {
-		setData([]);
-		let setValue = `${e.selected.toString().concat("00")}`;
-		fetchData(setValue);
+		let newOffset = (e.selected * cardsPerPage.toString().replace("0", ""))
+			.toString()
+			.concat("0");
+		fetchData(newOffset);
 	};
 
 	return (
@@ -56,7 +60,7 @@ const Paginate = cardsPerPage => {
 
 			<ReactPaginate
 				previousLabel={"previous"}
-				pageCount={9}
+				pageCount={numberPages}
 				nextLabel={"next"}
 				breakLabel={"..."}
 				onPageChange={handlePageClick}

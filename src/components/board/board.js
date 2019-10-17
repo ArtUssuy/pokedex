@@ -7,7 +7,13 @@ import Infinite from "./../infinite/Infinite";
 
 const Board = () => {
 	const [layout, setLayout] = useState(true);
-	const [cardsPerPage, setCardsPerPage] = useState("10");
+	const [cardsPerPage, setCardsPerPage] = useState(10);
+	const totalPokemons = 1090;
+
+	const handleSelect = e => {
+		setCardsPerPage(e.target.value);
+	};
+
 	return (
 		<>
 			<FilterWrapper>
@@ -23,7 +29,7 @@ const Board = () => {
 				</Label>
 				<Label>
 					Per page
-					<select>
+					<select onChange={handleSelect}>
 						<option>10</option>
 						<option>20</option>
 						<option>30</option>
@@ -32,10 +38,16 @@ const Board = () => {
 				<Button>Apply!</Button>
 			</FilterWrapper>
 
-			{layout === true ? (
-				<Infinite cardsPerPage={cardsPerPage} />
+			{layout === false ? (
+				<Infinite
+					cardsPerPage={cardsPerPage}
+					totalPokemons={totalPokemons}
+				/>
 			) : (
-				<Paginate cardsPerPage={cardsPerPage} />
+				<Paginate
+					cardsPerPage={cardsPerPage}
+					totalPokemons={totalPokemons}
+				/>
 			)}
 		</>
 	);

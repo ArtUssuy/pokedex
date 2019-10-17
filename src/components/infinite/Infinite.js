@@ -8,7 +8,7 @@ import Card from "./../cards/cards";
 
 const Infinite = ({ cardsPerPage }) => {
 	const [data, setData] = useState([]);
-	const [infiniteScroll, setInfiniteScroll] = useState(100);
+	const [infiniteScroll, setInfiniteScroll] = useState(10);
 
 	useEffect(() => {
 		fetchData();
@@ -23,7 +23,7 @@ const Infinite = ({ cardsPerPage }) => {
 
 	const fetchMoreData = () => {
 		let value = infiniteScroll;
-		setInfiniteScroll((value += 100));
+		setInfiniteScroll((value += 10));
 		fetchData(0, infiniteScroll);
 	};
 
