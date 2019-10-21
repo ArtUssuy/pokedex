@@ -6,46 +6,81 @@ import Paginate from "./../paginate/paginate";
 import Infinite from "./../infinite/Infinite";
 
 const Board = () => {
-	const [layout, setLayout] = useState(true);
-	const [cardsPerPage, setCardsPerPage] = useState(10);
-	const totalPokemons = 1090;
+	const totalPokemons = 807;
+
+	const [numberOfCards, setNumberOfCards] = useState(10);
+	const [layout, setLayout] = useState("infinite");
+	const [range, setRange] = useState({
+		initial: undefined,
+		final: undefined
+	});
+
+	const [filterOptions, setFilterOptions] = useState({
+		layout: "infinite",
+		initial: undefined,
+		final: undefined,
+		numberOfCards: 10
+	});
 
 	const handleSelect = e => {
-		setCardsPerPage(e.target.value);
+		console.log("filterOptions :", filterOptions);
+		setNumberOfCards(e.target.value);
+		console.log("e.target.value :", e.target.value);
+		console.log("numberOfCards :", numberOfCards);
+	};
+
+	const handleInput = e => {
+		e.target.name === "initial"
+			? setRange({ initial: e.target.value })
+			: setRange({ final: e.target.value });
+	};
+
+	const handleLayout = e => setLayout(e.target.value);
+
+	const handleSubmit = e => {
+		e.preventDefault();
+		setFilterOptions({
+			layout: layout,
+			initial: range.initial,
+			final: range.final,
+			numberOfCards: numberOfCards
+		});
 	};
 
 	return (
 		<>
-			<FilterWrapper>
-				<select onChange={e => setLayout(!layout)}>
-					<option>Infinite Scroll</option>
-					<option>Paginate</option>
+			<FilterWrapper onSubmit={handleSubmit}>
+				<select onChange={handleLayout}>
+					<option value="infinite">Infinite Scroll</option>
+					<option value="paginate">Paginate</option>
 				</select>
 				<Label>
-					Numero Inicial <input type="text" />
+					Numero Inicial{" "}
+					<input name="initial" onChange={handleInput} type="text" />
 				</Label>
 				<Label>
-					Numero Final <input type="text" />
+					Numero Final{" "}
+					<input name="final" onChange={handleInput} type="text" />
 				</Label>
 				<Label>
 					Per page
 					<select onChange={handleSelect}>
-						<option>10</option>
-						<option>20</option>
-						<option>30</option>
+						<option value={10}>10</option>
+						<option value={20}>20</option>
+						<option value={30}>30</option>
 					</select>
 				</Label>
-				<Button>Apply!</Button>
+				<Button type="submit">Apply!</Button>
 			</FilterWrapper>
 
-			{layout === false ? (
+			{filterOptions.layout === "infinite" ? (
 				<Infinite
-					cardsPerPage={cardsPerPage}
+					filterOptions={filterOptions}
 					totalPokemons={totalPokemons}
 				/>
 			) : (
 				<Paginate
-					cardsPerPage={cardsPerPage}
+					filterOptions={filterOptions}
 					totalPokemons={totalPokemons}
 				/>
 			)}

@@ -11,7 +11,7 @@ export const Container = styled.div`
 	background-color: #fff;
 `;
 
-export const FilterWrapper = styled.div`
+export const FilterWrapper = styled.form`
 	display: flex;
 	align-items: center;
 	justify-content: center;
