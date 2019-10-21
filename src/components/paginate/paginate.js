@@ -1,78 +1,78 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import ReactPaginate from "react-paginate";
-import LazyLoad from "react-lazyload";
-
-import "./styles.css";
-
-import { Container } from "./styles";
+import { getPokemons } from "./../../services/api";
 import Card from "./../cards/cards";
+import { Container } from "./styles";
+import "./paginate.css";
 
-const Paginate = ({ filterOptions, totalPokemons }) => {
-	const [data, setData] = useState([]);
-	const [numberPages] = useState(totalPokemons / filterOptions.numberOfCards);
+const Paginate = () => {
+	const [pokemons, setPokemons] = useState([]);
+	const [range, setRange] = useState({
+		offset: 0,
+		limit: 20
+	});
+	const [pagesQtd, setPagesQtd] = useState();
 
 	useEffect(() => {
-		fetchData();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [filterOptions]);
+		getMons(range.offset, range.limit);
+	}, [range.offset]);
 
-	const fetchData = async (
-		offset = 0,
-		limit = filterOptions.numberOfCards
-	) => {
-		const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
-		const response = await axios(url);
-		setData(response.data.results);
+	useEffect(() => {
+		getPagesQtd();
+	}, []);
+
+	const getPagesQtd = () => {
+		let totalPages = Math.round(964 / range.limit);
+		setPagesQtd(totalPages);
 	};
 
-	const handlePageClick = e => {
-		let newOffset = (
-			e.selected * filterOptions.numberOfCards.toString().replace("0", "")
-		)
-			.toString()
-			.concat("0");
-		fetchData(newOffset);
+	const getMons = async (offset, limit) => {
+		let response = await getPokemons(offset, limit);
+		setPokemons(response.data.results);
+	};
+
+	const getIndex = url => {
+		return url.split("/")[url.split("/").length - 2];
+	};
+
+	const getMoreMons = e => {
+		console.log("range.limit :", range.limit);
+		let limit = range.limit; //dont know why, gets undefined after changing pages 2, 3 times
+		let newOffset = e.selected * limit;
+		setRange({
+			offset: newOffset,
+			limit: 20
+		});
 	};
 
 	return (
 		<>
 			<Container>
-				{data !== undefined
-					? data.map(pokemon =>
-							pokemon.url.split("/")[
-								pokemon.url.split("/").length - 2
-							] < 10091 ? (
-								<LazyLoad key={pokemon.name}>
-									<Card
-										key={pokemon.name}
-										pokemonName={pokemon.name}
-										pokemonIndex={
-											pokemon.url.split("/")[
-												pokemon.url.split("/").length -
-													2
-											]
-										}
-									/>
-								</LazyLoad>
-							) : (
-								""
-							)
-					  )
-					: ""}
+				{pokemons.map(pokemon => (
+					<Card
+						name={pokemon.name}
+						index={getIndex(pokemon.url)}
+						key={getIndex(pokemon.url)}
+					/>
+				))}
 			</Container>
 
-			<ReactPaginate
-				previousLabel={"previous"}
-				pageCount={numberPages}
-				nextLabel={"next"}
-				breakLabel={"..."}
-				onPageChange={handlePageClick}
-				containerClassName={"pagination"}
-				pageClassName={"items"}
-				subContainerClassName={"pages pagination"}
-				activeClassName={"active"}
-			/>
+			{pagesQtd !== false ? (
+				<ReactPaginate
+					previousLabel={"previous"}
+					pageCount={pagesQtd}
+					nextLabel={"next"}
+					breakLabel={"..."}
+					onPageChange={getMoreMons}
+					containerClassName={"pagination"}
+					pageClassName={"items"}
+					subContainerClassName={"pages pagination"}
+					activeClassName={"active"}
+				/>
+			) : (
+				<div>Carregando...</div>
+			)}
 		</>
 	);
 };

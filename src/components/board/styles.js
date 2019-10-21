@@ -1,15 +1,28 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-	width: 70%;
-	margin: 40px auto;
 	display: flex;
-	flex-wrap: wrap;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding-top: 10px;
-	background-color: #fff;
 `;
+
+export const ButtonsWrapper = styled.section`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+`;
+
+// export const Container = styled.div`
+// 	width: 70%;
+// 	margin: 40px auto;
+// 	display: flex;
+// 	flex-wrap: wrap;
+// 	align-items: center;
+// 	justify-content: center;
+// 	padding-top: 10px;
+// 	background-color: #fff;
+// `;
 
 export const FilterWrapper = styled.form`
 	display: flex;

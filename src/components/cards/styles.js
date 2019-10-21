@@ -18,7 +18,7 @@ export const Container = styled.div`
 `;
 
 export const Image = styled.img`
-	transform: scale(2.4);
+	transform: scale(2);
 `;
 
 export const Footer = styled.footer`
